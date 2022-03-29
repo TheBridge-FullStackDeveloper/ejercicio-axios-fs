@@ -1,0 +1,22 @@
+{
+  "name": "ejercicio-axios-fs",
+  "version": "1.0.0",
+  "description": "- Inicializa un proyecto `npm`\r - Instala `axios`",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaengustavof/ejercicio-axios-fs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaengustavof/ejercicio-axios-fs/issues"
+  },
+  "homepage": "https://github.com/jaengustavof/ejercicio-axios-fs#readme",
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
+}
