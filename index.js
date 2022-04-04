@@ -19,8 +19,10 @@ const isDataCreated = () => {
     return isData
 };
     tried to do a function that serves as an IF to not create
-    /DATA if it already exists but couldn't :(
-    if (isData) return    
+    /DATA if it already exists but couldn't 😫😭
+
+
+    if (isData) return    <-- this was in createDir
 */
 
 
@@ -29,9 +31,9 @@ const createDir = async () => {
     try {
         await mkdir(path.join(__dirname, 'data'), (err) => {
             if (err) {
-                
+                //empty so it doesn't spam me errors when it's already created
             } else {
-                console.log('dir created')
+                console.log('dir created');
             };
         });
     } catch (error) {
@@ -40,15 +42,15 @@ const createDir = async () => {
 };
 
 // CREATE DATA FILE
-/*
+//   can't figure out how to not rewrite saved data 🤔
+
 const createDatabase = () => {
-    writeFile('./data/pokemon.js', JSON.stringify({}), err => {
+    writeFile('./data/pokemon.js', JSON.stringify([]), err => {
         if (err) {
             console.error('updating pokemon data err: ', err)
         }
     });
 }
-*/
 
 const getPokemon = async () => {
     const [, , ...pokemons] = process.argv;
@@ -58,32 +60,40 @@ const getPokemon = async () => {
             const URL = `${BASE_URL}${SUB_URL}/${pokemon}`;
             const result = await axios.get(URL);
             const { base_experience, id, sprites, name } = result.data;
-
-            const newPokemon = `
-            Pokemon: ${name}
-            Id: ${id}
-            Base EXP: ${base_experience}
-            Image: ${sprites.front_default}
             
-            `;
+            const newPokemon = {
+                [name]: {
+                    base_EXP: base_experience,
+                    id: id,
+                    images: {
+                        front_deafult: sprites.front_default,
+                        shiny: sprites.front_shiny
+                    }
+                },
+            };
             
             let pokemonData = require('./data/pokemon.js');
-            let newPokemonData = newPokemon;
+            let newPokemonData;
             
-            if (Object.keys(pokemonData).length) {
+            if (Object.keys(pokemonData).length === 0) {
+                newPokemonData = newPokemon;
+            } else {
                 newPokemonData = [...pokemonData, newPokemon];
                 console.log(newPokemonData);
             };
 
             
-            writeFile('./data/pokemon.js', JSON.stringify(pokemonData), err => {
+            appendFile('./data/pokemon.js', JSON.stringify([newPokemonData]), err => {
                 if (err) {
-                    console.error('updating pokemon data err: ', err)
+                    console.error('writeFile err: ', err)
+                } else {
+                    console.info(newPokemon)
                 };
             });
             
         } catch (error) {
-            console.error('For await error: ', error.message);
+            console.error('Catch error: ', error.message);
+            //Catch error:  Cannot read properties of undefined (reading '#<Object>')
         };
         
     };
