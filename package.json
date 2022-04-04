@@ -1,0 +1,25 @@
+{
+  "name": "ejercicio-axios-fs",
+  "version": "1.0.0",
+  "description": "mi primerito package :3",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brujitari/ejercicio-axios-fs.git"
+  },
+  "keywords": [
+    "axios"
+  ],
+  "author": "Nat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brujitari/ejercicio-axios-fs/issues"
+  },
+  "homepage": "https://github.com/Brujitari/ejercicio-axios-fs#readme",
+  "dependencies": {
+    "axios": "^0.26.1"
+  }
+}
